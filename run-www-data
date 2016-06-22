@@ -11,7 +11,7 @@ cd syndicate/racket
 git pull
 
 cd syndicate/broker
-raco make broker.rkt
+raco make server.rkt
 
 export PLTSTDERR="$PLTSTDERR debug@syndicate-broker"
-exec racket broker.rkt 2>&1
+exec racket server.rkt 2>&1
