@@ -1,0 +1,2 @@
+#!/bin/sh
+exec setuidgid www-data multilog t s999999 n500 ./main

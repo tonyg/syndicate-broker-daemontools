@@ -1,0 +1,23 @@
+#!/bin/bash
+# Prepares syndicate broker to run locally.
+set -e
+set -x
+
+[ $(whoami) = 'www-data' ]
+
+if [ ! -d racket ]
+then
+    if [ ! -f racket-nightly.sh ]
+    then
+        curl 'https://www.cs.utah.edu/plt/snapshots/current/installers/racket-current-x86_64-linux-precise.sh' > racket-nightly.sh
+    fi
+    printf 'no\n./racket\n\n' | sh ./racket-nightly.sh
+fi
+
+if [ ! -d syndicate ]
+then
+   git clone ${SYNDICATE_REPO:-../syndicate} syndicate
+fi
+
+. ./setup-env
+(cd syndicate/racket; raco pkg install --auto -n syndicate $(pwd))

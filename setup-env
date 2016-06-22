@@ -1,0 +1,2 @@
+export PATH="`pwd`/racket/bin:$PATH"
+export HOME="`pwd`"

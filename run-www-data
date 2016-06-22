@@ -1,0 +1,17 @@
+#!/bin/bash
+# Daemontools startup script for Syndicate broker.
+set -e
+set -x
+
+[ $(whoami) = 'www-data' ]
+
+. ./setup-env
+
+cd syndicate/racket
+git pull
+
+cd syndicate/broker
+raco make broker.rkt
+
+export PLTSTDERR="$PLTSTDERR debug@syndicate-broker"
+exec racket broker.rkt 2>&1

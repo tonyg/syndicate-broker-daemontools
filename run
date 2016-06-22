@@ -1,0 +1,5 @@
+#!/bin/bash
+# Daemontools startup script for Syndicate broker.
+set -e
+set -x
+exec setuidgid www-data ./run-www-data
