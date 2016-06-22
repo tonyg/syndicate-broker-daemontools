@@ -3,7 +3,7 @@
 set -e
 set -x
 
-[ $(whoami) = 'www-data' ]
+[ $(whoami) = 'root' ]
 
 if [ ! -d racket ]
 then
@@ -19,5 +19,12 @@ then
    git clone ${SYNDICATE_REPO:-../syndicate} syndicate
 fi
 
+mkdir -p .racket
+
+chown -R www-data:www-data \
+      racket \
+      syndicate \
+      .racket
+
 . ./setup-env
-(cd syndicate/racket; raco pkg install --auto -n syndicate $(pwd))
+(cd syndicate/racket; setuidgid www-data raco pkg install --auto -n syndicate $(pwd))
