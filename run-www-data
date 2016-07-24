@@ -9,6 +9,7 @@ set -x
 
 cd syndicate/racket
 git pull
+raco pkg update --auto --update-deps syndicate || true # ignore errors here
 
 cd syndicate/broker
 raco make server.rkt
